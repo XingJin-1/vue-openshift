@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <h1>Welcome to Your Vue.js App!</h1>
+
+    <button @click="getCookie">Get Token</button>
+
+    <p id="content"></p>
+
   </div>
 </template>
 
@@ -15,18 +17,35 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  margin-top: 60px;
 }
 </style>
+
+<script>
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
+
+export default {
+   methods:{
+     getCookie(){
+      // it gets the cookie called `username`
+      axios.get(``)
+      .then(response => {
+        this.header = response.headers;
+        console.log(this.header);
+        var idToken = this.header['authorization'];
+        idToken = idToken.replace('Bearer ','');
+        var decoded = jwt_decode(idToken);
+        console.log(decoded);
+        //var accessToken = this.header['x-auth-request-access-token'];
+        //console.log(accessToken);
+        let paragraph = document.getElementById("content");
+
+        var outputText = 'Name: ' + decoded['name'] + "\n" + 'Email: ' + decoded['email'] + "\n" + 'Issuer: ' + decoded['iss'] + "\n" + 'Auth Time: ' + decoded['auth_time'] + "\n" + 'Job Token: ' + decoded['jti'] + "\n"
+        
+        paragraph.innerText = outputText;
+      })
+     }
+   }
+};
+</script>
