@@ -1,5 +1,5 @@
-IMAGE_NAME = openshift-registry.eu-de-3.icp.infineon.com/rddl-test/xing-vue-app-2-2
-NAME = xing-vue-app-2
+IMAGE_NAME = xing-vue-app-2-6
+NAME = xing-vue-app-2-6
 CONTAINER_ENGINE = docker
 
 force-build:

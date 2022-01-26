@@ -28,7 +28,6 @@ import jwt_decode from "jwt-decode";
 export default {
    methods:{
      getCookie(){
-      // it gets the cookie called `username`
       axios.get(``)
       .then(response => {
         this.header = response.headers;
@@ -37,12 +36,10 @@ export default {
         idToken = idToken.replace('Bearer ','');
         var decoded = jwt_decode(idToken);
         console.log(decoded);
-        //var accessToken = this.header['x-auth-request-access-token'];
-        //console.log(accessToken);
+
         let paragraph = document.getElementById("content");
 
         var outputText = 'Name: ' + decoded['name'] + "\n" + 'Email: ' + decoded['email'] + "\n" + 'Issuer: ' + decoded['iss'] + "\n" + 'Auth Time: ' + decoded['auth_time'] + "\n" + 'Job Token: ' + decoded['jti'] + "\n"
-        
         paragraph.innerText = outputText;
       })
      }
